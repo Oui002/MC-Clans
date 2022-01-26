@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public class RequestUtils {
 
-    private static HashMap<String, String> requests = new HashMap<String, String>();
+    private static HashMap<String, String> requests = new HashMap<>();
 
     public static boolean addToRequests(Player receiver, Player sender) {
 
@@ -25,18 +25,15 @@ public class RequestUtils {
 
     }
 
-    public static boolean removeFromRequests(Player receiver) {
+    public static void removeFromRequests(Player receiver) {
 
         String receiverUUID = receiver.getUniqueId().toString();
 
         if (playerInHashMap(receiver)) {
 
             requests.remove(receiverUUID);
-            return true;
 
         }
-
-        return false;
 
     }
 

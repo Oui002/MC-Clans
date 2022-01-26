@@ -8,8 +8,6 @@ import hc.mexol.xyz.clans.listeners.PlayerDamageEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import java.util.HashMap;
-
 public final class Clans extends JavaPlugin {
 
     private MongoClient mongoClient;

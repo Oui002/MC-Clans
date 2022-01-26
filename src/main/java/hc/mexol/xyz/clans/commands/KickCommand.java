@@ -26,7 +26,7 @@ public class KickCommand implements CommandExecutor {
 
                 Player playerToKick = Bukkit.getPlayer(args[0]);
 
-                if (playerToKick != null && playerToKick instanceof Player) {
+                if (playerToKick != null) {
 
                     if (playerToKick.equals(player)) {
 
