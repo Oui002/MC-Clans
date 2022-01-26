@@ -1,0 +1,30 @@
+name: Clans
+version: '${project.version}'
+main: hc.mexol.xyz.clans.Clans
+api-version: 1.18
+prefix: Oui002
+authors: [ Oui002 ]
+description: ... Clans
+commands:
+  create:
+    description: Create your clan.
+    usage: /<command> <clan name>
+  leave:
+    description: Leave the clan you are currently in.
+    usage: /<command>
+  join:
+    description: Join a clan.
+    usage: /<command> <clan name>
+  transferclan:
+    description: Transfer the clan to the specified player.
+    usage: /<command> <player name>
+  kickplayer:
+    description: Kicks a player if you're the leader of the clan you are currently in.
+    usage: /<command> <player name>
+  accept:
+    description: Accepts a join request.
+    usage: /<command>
+  deny:
+    description: Denies a join request.
+    usage: /<command>
+
