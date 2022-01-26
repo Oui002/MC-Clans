@@ -17,7 +17,7 @@ public class CreateCommand implements CommandExecutor {
 
             String currentClanName = ClanUtils.getPlayerClan(player);
 
-            if (currentClanName.equals("none")) {
+            if (currentClanName.equalsIgnoreCase("none")) {
 
                 if (args.length == 0) {
 

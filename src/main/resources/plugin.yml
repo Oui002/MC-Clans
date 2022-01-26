@@ -27,4 +27,7 @@ commands:
   deny:
     description: Denies a join request.
     usage: /<command>
+  setclancolor:
+    description: Sets the color of your clan prefix shown upon members sending messages.
+    usage: /<command> <minecraft § color code character>
 

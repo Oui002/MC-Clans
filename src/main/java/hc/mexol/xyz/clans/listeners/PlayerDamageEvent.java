@@ -1,6 +1,7 @@
 package hc.mexol.xyz.clans.listeners;
 
 import hc.mexol.xyz.clans.utils.ClanUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Zombie;
 import org.bukkit.event.EventHandler;
@@ -10,7 +11,7 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 public class PlayerDamageEvent implements Listener {
 
     @EventHandler
-    public void PlayerDamageEvent(EntityDamageByEntityEvent event) {
+    public void PlayerDamage(EntityDamageByEntityEvent event) {
 
         if (event.getEntity() instanceof Player player) {
 
@@ -19,9 +20,13 @@ public class PlayerDamageEvent implements Listener {
                 String playerClan = ClanUtils.getPlayerClan(player);
                 String damagerClan = ClanUtils.getPlayerClan(damager);
 
-                if (playerClan.equalsIgnoreCase(damagerClan) /* && clanSettings.pvpEnabled */) {
+                if (!playerClan.equalsIgnoreCase("none") && !damagerClan.equalsIgnoreCase("none")) {
 
-                    event.setCancelled(true);
+                    if (playerClan.equalsIgnoreCase(playerClan) && !ClanUtils.getClanSettings(playerClan).getBoolean("pvp-enabled")) {
+
+                        event.setCancelled(true);
+
+                    }
 
                 }
 

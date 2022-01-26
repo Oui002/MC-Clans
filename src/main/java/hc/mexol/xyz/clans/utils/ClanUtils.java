@@ -22,13 +22,14 @@ public class ClanUtils {
 
         if (!name.equalsIgnoreCase("none")) {
 
-            clansDatabase.createCollection(name);
+            clansDatabase.createCollection(name.toUpperCase());
 
-            Document leaderDocument = new Document(name, "settings")
+            Document leaderDocument = new Document(name.toUpperCase(), "settings")
                     .append("leader-uuid", "")
-                    .append("pvp-enabled", false);
+                    .append("pvp-enabled", false)
+                    .append("clan-color", "§l §f");
 
-            clansDatabase.getCollection(name).insertOne(leaderDocument);
+            clansDatabase.getCollection(name.toUpperCase()).insertOne(leaderDocument);
 
         }
 
@@ -36,9 +37,9 @@ public class ClanUtils {
 
     public static void deleteClanIfEmpty(String name) {
 
-        if (!clanIsEmpty(name)) {
+        if (!clanIsEmpty(name.toUpperCase())) {
 
-            getClansCollection(name).drop();
+            getClansCollection(name.toUpperCase()).drop();
 
         }
 
@@ -48,13 +49,13 @@ public class ClanUtils {
 
         String playerClanName = getPlayerClan(player);
 
-        if (playerClanName.equals("none")) {
+        if (playerClanName.equalsIgnoreCase("none")) {
 
             Document playerDocument = new Document
                     ("uuid", player.getUniqueId().toString())
                     .append("join-date", new Date());
 
-            getClansCollection(name).insertOne(playerDocument);
+            getClansCollection(name.toUpperCase()).insertOne(playerDocument);
 
         } else {
             
@@ -66,7 +67,7 @@ public class ClanUtils {
 
     public static boolean removePlayer(String name, Player player) {
 
-        if (name.equals("none")) {
+        if (name.equalsIgnoreCase("NONE")) {
 
             return false;
 
@@ -74,9 +75,9 @@ public class ClanUtils {
 
             Document playerFilter = new Document(new Document("uuid", player.getUniqueId().toString()));
 
-            getClansCollection(name).deleteOne(playerFilter);
+            getClansCollection(name.toUpperCase()).deleteOne(playerFilter);
 
-            deleteClanIfEmpty(name);
+            deleteClanIfEmpty(name.toUpperCase());
 
             return true;
 
@@ -86,20 +87,28 @@ public class ClanUtils {
 
     public static MongoCollection<Document> getClansCollection(String name) {
 
-        return clansDatabase.getCollection(name);
+        return clansDatabase.getCollection(name.toUpperCase());
+
+    }
+
+    public static Document getClanSettings(String name) {
+
+        Document settingsFilter = new Document(name.toUpperCase(), "settings");
+
+        return getClansCollection(name.toUpperCase()).find(settingsFilter).first();
 
     }
 
     public static boolean clanExists(String name) {
 
         return Clans.getClansDatabase().listCollectionNames()
-                .into(new ArrayList<>()).contains(name);
+                .into(new ArrayList<>()).contains(name.toUpperCase());
 
     }
 
     public static boolean clanIsEmpty(String name) {
 
-        return clansDatabase.getCollection(name).countDocuments() > 1;
+        return clansDatabase.getCollection(name.toUpperCase()).countDocuments() > 1;
 
     }
 
@@ -107,6 +116,14 @@ public class ClanUtils {
 
         Document filter = new Document(new Document("leader-uuid", player.getUniqueId().toString()));
         return clansDatabase.getCollection(getPlayerClan(player)).countDocuments(filter) == 1;
+
+    }
+
+    public static boolean inClan(Player player) {
+
+        String playerClanName = getPlayerClan(player);
+
+        return playerClanName != "none";
 
     }
 
@@ -125,14 +142,14 @@ public class ClanUtils {
 
         }
 
-        return "none";
+        return "NONE";
 
     }
 
     public static Player getClanLeader(String name) {
 
-        Document filter = new Document(name, "settings");
-        ArrayList<Document> docs = getClansCollection(name).find(filter)
+        Document filter = new Document(name.toUpperCase(), "settings");
+        ArrayList<Document> docs = getClansCollection(name.toUpperCase()).find(filter)
                 .into(new ArrayList<>());
 
         Document clanSettingsDoc = docs.get(0);
@@ -144,8 +161,14 @@ public class ClanUtils {
     
     public static void setClanLeader(String name, Player player) {
 
-        clansDatabase.getCollection(name).updateOne(Filters.eq(name, "settings"), Updates.set("leader-uuid", player.getUniqueId().toString()));
+        clansDatabase.getCollection(name.toUpperCase()).updateOne(Filters.eq(name.toUpperCase(), "settings"), Updates.set("leader-uuid", player.getUniqueId().toString()));
         
+    }
+
+    public static void setClanColor(String name, String letter) {
+
+        clansDatabase.getCollection(name.toUpperCase()).updateOne(Filters.eq(name.toUpperCase(), "settings"), Updates.set("clan-color", "§l " + "§" + letter));
+
     }
 
 }

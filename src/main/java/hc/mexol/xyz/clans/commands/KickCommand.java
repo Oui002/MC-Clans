@@ -60,7 +60,7 @@ public class KickCommand implements CommandExecutor {
 
                 String playerClanName = ClanUtils.getPlayerClan(player);
 
-                if (!playerClanName.equals("none")) {
+                if (!playerClanName.equalsIgnoreCase("none")) {
 
                     player.sendMessage(ChatColor.RED + "You are not the leader of " + ChatColor.DARK_RED + "" + ChatColor.BOLD +  playerClanName);
 
