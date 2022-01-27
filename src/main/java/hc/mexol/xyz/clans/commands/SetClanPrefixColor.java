@@ -37,7 +37,7 @@ public class SetClanPrefixColor implements CommandExecutor {
 
                 ClanUtils.setClanColor(clanName, colorCode);
 
-                player.sendMessage(ChatColor.YELLOW + "Updated you clan's color to" + "§" + colorCode + " " + colorCode);
+                player.sendMessage(ChatColor.YELLOW + "Updated your clan's color to" + "§" + colorCode + " " + colorCode);
 
             }
             
