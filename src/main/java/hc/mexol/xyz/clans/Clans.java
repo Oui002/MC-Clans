@@ -19,7 +19,7 @@ public final class Clans extends JavaPlugin {
     @Override
     public void onEnable() {
 
-        mongoClient = MongoClients.create("mongodb+srv://Oui002:rYj7fRME9cNnqHx@cluster0.jlhx6.mongodb.net/Cluster0?retryWrites=true&w=majority");
+        mongoClient = MongoClients.create("mongodb+srv://Oui002:password@cluster0.jlhx6.mongodb.net/Cluster0?retryWrites=true&w=majority");
 //        mongoClient = MongoClients.create("mongodb://localhost:27017");
         clansDatabase = mongoClient.getDatabase("Clans");
 
