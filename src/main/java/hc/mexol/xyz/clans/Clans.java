@@ -23,7 +23,7 @@ public final class Clans extends JavaPlugin {
 //        mongoClient = MongoClients.create("mongodb://localhost:27017");
         clansDatabase = mongoClient.getDatabase("Clans");
 
-        getCommand("create").setExecutor(new CreateCommand());
+        getCommand("create").setExecutor(new CreateCommand())
         getCommand("join").setExecutor(new JoinCommand());
         getCommand("leave").setExecutor(new LeaveCommand());
         getCommand("setclancolor").setExecutor(new SetClanPrefixColor());
